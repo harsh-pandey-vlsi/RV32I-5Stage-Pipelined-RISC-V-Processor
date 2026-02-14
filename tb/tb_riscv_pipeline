@@ -1,0 +1,81 @@
+`timescale 1ns/1ps
+
+module tb_riscv_pipeline;
+
+    logic clk;
+    logic rst;
+
+    // Instantiate DUT
+    riscv_pipeline dut (
+        .clk(clk),
+        .rst(rst)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // -------------------------------------
+    // Waveform Dump
+    // -------------------------------------
+    initial begin
+        $dumpfile("riscv_pipeline.vcd");
+        $dumpvars(0, tb_riscv_pipeline);
+    end
+
+    // -------------------------------------
+    // Reset Sequence
+    // -------------------------------------
+    initial begin
+        clk = 0;
+        rst = 1;
+
+        #20;
+        rst = 0;
+    end
+
+    // -------------------------------------
+    // Pipeline Monitor
+    // -------------------------------------
+    always @(posedge clk) begin
+        $display("T=%0t | PC=%0d | IF_ID=%h | ID_EX_rd=%0d | EX_MEM_rd=%0d | MEM_WB_rd=%0d",
+            $time,
+            dut.pc_inst.pc,
+            dut.if_id_instr,
+            dut.id_ex_rd,
+            dut.ex_mem_rd,
+            dut.mem_wb_rd
+        );
+    end
+
+    // -------------------------------------
+    // Final Verification
+    // -------------------------------------
+    initial begin
+        #200;   // Let pipeline drain
+
+        $display("\n--- Checking Final Register State ---");
+
+        if (dut.rf.regs[1] !== 32'd5)
+            $fatal("FAIL: x1 incorrect");
+
+        if (dut.rf.regs[2] !== 32'd10)
+            $fatal("FAIL: x2 incorrect");
+
+        if (dut.rf.regs[3] !== 32'd15)
+            $fatal("FAIL: x3 incorrect");
+
+        if (dut.rf.regs[4] !== 32'd20)
+            $fatal("FAIL: x4 incorrect");
+
+        if (dut.rf.regs[5] !== 32'd25)
+            $fatal("FAIL: x5 incorrect");
+
+        if (dut.rf.regs[0] !== 32'd0)
+            $fatal("FAIL: x0 modified!");
+
+        $display("PASS: Pipeline executed correctly.");
+        $finish;
+    end
+
+endmodule
+
