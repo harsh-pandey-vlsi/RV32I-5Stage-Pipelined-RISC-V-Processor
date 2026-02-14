@@ -1,0 +1,140 @@
+qrun -batch -access=rw+/. -timescale 1ns/1ns -mfcu design.sv testbench.sv -voptargs="+acc=npr" -do " run -all; exit" 
+** Note: (qrun-220) 'modelsim.ini' is used as the ini file.
+Creating library 'qrun.out/work'.
+QuestaSim-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+Start time: 13:49:56 on Feb 14,2026
+vlog -timescale 1ns/1ns -mfcu design.sv testbench.sv -work qrun.out/work -statslog qrun.out/stats_log -csession=incr 
+** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
+-- Compiling module reg_file
+-- Compiling module alu
+-- Compiling module imm_gen
+-- Compiling module control_unit
+-- Compiling module alu_control
+-- Compiling module pc
+-- Compiling module instr_mem
+-- Compiling module data_mem
+-- Compiling module if_id
+-- Compiling module id_ex
+-- Compiling module ex_mem
+-- Compiling module mem_wb
+-- Compiling module riscv_pipeline
+-- Compiling module tb_riscv_pipeline
+
+Top level modules:
+	tb_riscv_pipeline
+End time: 13:49:56 on Feb 14,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+QuestaSim-64 vopt 2025.2 Compiler 2025.05 May 31 2025
+** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+Start time: 13:49:56 on Feb 14,2026
+vopt -access=rw+/. -timescale 1ns/1ns -mfcu "+acc=npr" -findtoplevels qrun.out/work+2+ -work qrun.out/work -statslog qrun.out/stats_log -csession=incr -o qrun_opt -csessionid=3 
+** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
+
+Top level modules:
+	tb_riscv_pipeline
+
+Analyzing design...
+-- Loading module tb_riscv_pipeline
+-- Loading module riscv_pipeline
+-- Loading module pc
+-- Loading module instr_mem
+-- Loading module if_id
+-- Loading module control_unit
+-- Loading module reg_file
+-- Loading module imm_gen
+-- Loading module id_ex
+-- Loading module alu_control
+-- Loading module alu
+-- Loading module ex_mem
+-- Loading module data_mem
+-- Loading module mem_wb
+Optimizing 14 design-units (inlining 0/14 module instances):
+-- Optimizing module riscv_pipeline(fast)
+-- Optimizing module id_ex(fast)
+-- Optimizing module control_unit(fast)
+-- Optimizing module ex_mem(fast)
+-- Optimizing module tb_riscv_pipeline(fast)
+-- Optimizing module imm_gen(fast)
+-- Optimizing module alu(fast)
+-- Optimizing module mem_wb(fast)
+-- Optimizing module reg_file(fast)
+-- Optimizing module alu_control(fast)
+-- Optimizing module data_mem(fast)
+-- Optimizing module if_id(fast)
+-- Optimizing module pc(fast)
+-- Optimizing module instr_mem(fast)
+Optimized design name is qrun_opt
+End time: 13:49:57 on Feb 14,2026, Elapsed time: 0:00:01
+Errors: 0, Warnings: 1
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -batch -lib qrun.out/work -do " run -all; exit" -statslog qrun.out/stats_log qrun_opt -appendlog -l qrun.log 
+# Start time: 13:49:57 on Feb 14,2026
+# //  Questa Sim-64
+# //  Version 2025.2 linux_x86_64 May 31 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tb_riscv_pipeline(fast)
+# Loading work.riscv_pipeline(fast)
+# Loading work.pc(fast)
+# Loading work.instr_mem(fast)
+# Loading work.if_id(fast)
+# Loading work.control_unit(fast)
+# Loading work.reg_file(fast)
+# Loading work.imm_gen(fast)
+# Loading work.id_ex(fast)
+# Loading work.alu_control(fast)
+# Loading work.alu(fast)
+# Loading work.ex_mem(fast)
+# Loading work.data_mem(fast)
+# Loading work.mem_wb(fast)
+# 
+# run -all
+# T=5000 | PC=0 | IF_ID=00000000 | ID_EX_rd=0 | EX_MEM_rd=0 | MEM_WB_rd=0
+# T=15000 | PC=0 | IF_ID=00000000 | ID_EX_rd=0 | EX_MEM_rd=0 | MEM_WB_rd=0
+# T=25000 | PC=0 | IF_ID=00000000 | ID_EX_rd=0 | EX_MEM_rd=0 | MEM_WB_rd=0
+# T=35000 | PC=4 | IF_ID=00500093 | ID_EX_rd=0 | EX_MEM_rd=0 | MEM_WB_rd=0
+# T=45000 | PC=8 | IF_ID=00a00113 | ID_EX_rd=1 | EX_MEM_rd=0 | MEM_WB_rd=0
+# T=55000 | PC=12 | IF_ID=00f00193 | ID_EX_rd=2 | EX_MEM_rd=1 | MEM_WB_rd=0
+# T=65000 | PC=16 | IF_ID=01400213 | ID_EX_rd=3 | EX_MEM_rd=2 | MEM_WB_rd=1
+# T=75000 | PC=20 | IF_ID=01900293 | ID_EX_rd=4 | EX_MEM_rd=3 | MEM_WB_rd=2
+# T=85000 | PC=24 | IF_ID=xxxxxxxx | ID_EX_rd=5 | EX_MEM_rd=4 | MEM_WB_rd=3
+# T=95000 | PC=28 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=5 | MEM_WB_rd=4
+# T=105000 | PC=32 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=5
+# T=115000 | PC=36 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=125000 | PC=40 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=135000 | PC=44 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=145000 | PC=48 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=155000 | PC=52 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=165000 | PC=56 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=175000 | PC=60 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=185000 | PC=64 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# T=195000 | PC=68 | IF_ID=xxxxxxxx | ID_EX_rd=x | EX_MEM_rd=x | MEM_WB_rd=x
+# 
+# --- Checking Final Register State ---
+# PASS: Pipeline executed correctly.
+# ** Note: $finish    : testbench.sv(77)
+#    Time: 200 ns  Iteration: 0  Instance: /tb_riscv_pipeline
+# End time: 13:49:58 on Feb 14,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+End time: 13:49:58 on Feb 14,2026, Elapsed time: 0:00:02
+*** Summary *********************************************
+    qrun: Errors:   0, Warnings:   0
+    vlog: Errors:   0, Warnings:   0
+    vopt: Errors:   0, Warnings:   1
+    vsim: Errors:   0, Warnings:   0
+  Totals: Errors:   0, Warnings:   1
+Finding VCD file...
+./riscv_pipeline.vcd
+[2026-02-14 18:49:59 UTC] Opening EPWave...
+Done
